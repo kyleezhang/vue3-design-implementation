@@ -1,7 +1,8 @@
+import { effect } from './effect.js'
 // 存储副作用的桶
 const bucket = new WeakMap()
 
-const data = { text: 'hello world' }
+const data = { ok: true, text: 'hello world' }
 
 const obj = new Proxy(data, {
     get(target, key) {
@@ -11,12 +12,12 @@ const obj = new Proxy(data, {
     set(target, key, newVal) {
         // 设置属性值
         target[key] = newVal
-        trigger(target, key)
+        return trigger(target, key)
     }
 })
 
 function track(target, key) {
-    if (!activeEffect) {return target[key] }
+    if (!window.activeEffect) {return target[key] }
     let depsMap = bucket.get(target)
     if (!depsMap) {
         bucket.set(target, (depsMap = new Map()))
@@ -26,8 +27,8 @@ function track(target, key) {
     if (!deps) {
         depsMap.set(key, (deps = new Set()))
     }
-    deps.add(activeEffect)
-    activeEffect.deps.push(deps)
+    deps.add(window.activeEffect)
+    window.activeEffect.deps.push(deps)
 }
 
 function trigger(target, key) {
@@ -36,6 +37,20 @@ function trigger(target, key) {
         return
     }
     const effects = depsMap.get(key)
+    // 会无限执行
+    // effects && effects.forEach(fn => {
+    //     fn()
+    // });
     const effectsToRun = new Set(effects)
     effectsToRun && effectsToRun.forEach(fn => fn());
+    return true
 }
+
+effect(function effectFn() {
+    console.log('!====hhh')
+    document.body.innerText = obj.ok ? obj.text : 'not'
+})
+
+setTimeout(() => {
+    obj.ok = false
+}, 6000)

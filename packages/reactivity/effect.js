@@ -1,11 +1,11 @@
 // 用全局变量存储被注册的副作用函数
-let activeEffect
+window.activeEffect = null
 
 // effect 函数用于注册副作用函数
-function effect(fn) {
+export function effect(fn) {
     const effectFn = () => {
         cleanup(effectFn)
-        activeEffect = effectFn
+        window.activeEffect = effectFn
         fn()
     }
     // 用来存储所有与副作用函数相关联的依赖集合
