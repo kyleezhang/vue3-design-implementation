@@ -41,8 +41,19 @@ function trigger(target, key) {
     // effects && effects.forEach(fn => {
     //     fn()
     // });
-    const effectsToRun = new Set(effects)
-    effectsToRun && effectsToRun.forEach(fn => fn());
+    const effectsToRun = new Set()
+    effects && effects.forEach(effectFn => {
+        if (effectFn !== window.activeEffect) {
+            effectsToRun.add(effectFn)
+        }
+    })
+    effectsToRun && effectsToRun.forEach(effectFn => {
+        if (effectFn.options.scheduler) {
+            effectFn.options.scheduler(effectFn)
+        } else {
+            effectFn()
+        }
+    });
     return true
 }
 
