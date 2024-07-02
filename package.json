@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "《Vue.js设计与实现》学习demo",
   "main": "index.js",
+  "private": "true",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:reactivity": "pnpm --filter reactivity run dev"
   },
   "repository": {
     "type": "git",
@@ -18,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/kyleezhang/vue3-design-implementation/issues"
   },
-  "homepage": "https://github.com/kyleezhang/vue3-design-implementation#readme"
+  "homepage": "https://github.com/kyleezhang/vue3-design-implementation#readme",
+  "engines": {
+    "node": ">=16",
+    "pnpm": ">=6"
+  }
 }

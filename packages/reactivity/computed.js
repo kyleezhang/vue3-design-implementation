@@ -1,5 +1,5 @@
-import { effect } from './effect'
-import { track, trigger } from './index'
+import { effect } from './effect.js'
+import { track, trigger } from './index.js'
 
 export function computed(getter) {
     let value // value 用来缓存上一次计算的值
@@ -20,6 +20,7 @@ export function computed(getter) {
                 dirty = false
             }
             // 当读取 value 时，手动调用track函数进行追踪
+            debugger
             track(obj, 'value')
             return value
         }
