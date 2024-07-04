@@ -6,7 +6,7 @@
   "private": "true",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev:reactivity": "pnpm --filter reactivity run dev"
+    "dev:04-reactivity": "pnpm --filter 04-reactivity run dev"
   },
   "repository": {
     "type": "git",
