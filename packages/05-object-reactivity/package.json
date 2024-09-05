@@ -1,7 +1,7 @@
 {
-  "name": "04-reactivity",
+  "name": "05-object-reactivity",
   "version": "1.0.0",
-  "description": "四、响应式系统的作用及实现",
+  "description": "五、非原始值的响应式方案",
   "main": "index.js",
   "type": "module",
   "scripts": {

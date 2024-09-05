@@ -5,7 +5,13 @@ importers:
   .:
     specifiers: {}
 
-  packages/reactivity:
+  packages/04-reactivity:
+    specifiers:
+      http-server: ^14.1.1
+    dependencies:
+      http-server: 14.1.1
+
+  packages/05-object-reactivity:
     specifiers:
       http-server: ^14.1.1
     dependencies:
